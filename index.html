@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vue案例</title>
+	<link rel="stylesheet" type="text/css" href="css/mystyle.css">
+</head>
+<body>
+
+  <div id="add" class="main">
+  	<h2>小目标</h2>
+  	<div class="list">
+  		<h3>添加小目标</h3>
+  		<input type="text" class="text-keywrod" placeholder="输入小目标后，按回车确认" @keyup.13="addList" v-model="addText" name="">
+  		<p>共有{{proList.length}}个小目标，{{noend==0?"全部完成了":'已完成'+(proList.length-noend)+','+'还有'+noend+'条未完成'}}</p>
+  		<p>
+  			<input type="radio" name="chooseType" @click="chooseList(1)" checked="true"><label>所有目标</label>
+  			<input type="radio" name="chooseType" @click="chooseList(2)"><label>已完成目标</label>
+  			<input type="radio" name="chooseType" @click="chooseList(3)"><label>未完成目标</label>
+  		</p>
+  	</div>
+  	<ul>
+  		<li v-for="(list,index) in newLies" class="li1" :class="{'eidting':curIndex===index }">
+  			<div>
+  				<span class="type-span" @click="list.status=!list.status" :class="{'status-end':list.status}"></span>
+  				<span @dblclick="curIndex=index">{{list.name}}</span>
+  				<span class="close" @click="delectList(index)">X</span>
+  			</div>
+  			<input type="text"  class="text2"  v-model='list.name' @keyup.esc='cancelEdit(list)' @blur='edited' @focus='editBefore(list.name)' @keyup.enter='edited' v-focus/>
+  		</li>
+  	</ul>
+  </div>
+<script type="text/javascript" src="js/vue.min.js"></script>
+<script type="text/javascript" src="js/myjavascript.js"></script>
+
+</body>
+</html>
